@@ -6,7 +6,7 @@ Window {
     visible: true
     width: 320
     height: 568
-    title: qsTr("Hello World")
+    title: qsTr("2048")
 
     Rectangle {
         id: principaleRectangle
@@ -66,6 +66,8 @@ Window {
                 height: 30
                 color: "#ffffff"
                 text: qsTr("12345")
+                bottomPadding: 5
+                verticalAlignment: Text.AlignVCenter
                 font.bold: true
                 font.family: "Verdana"
                 horizontalAlignment: Text.AlignHCenter
@@ -110,6 +112,8 @@ Window {
                 height: 30
                 color: "#ffffff"
                 text: qsTr("12345")
+                bottomPadding: 5
+                verticalAlignment: Text.AlignVCenter
                 font.pixelSize: 12
                 horizontalAlignment: Text.AlignHCenter
                 font.family: "Verdana"
@@ -145,7 +149,7 @@ Window {
             border.width: 0
 
             Text {
-                id: text2
+                id: newGameText
                 x: 47
                 y: 8
                 color: "#f9f6f2"
@@ -584,13 +588,64 @@ Window {
                     anchors.fill: parent
                 }
             }
+
+            Rectangle {
+                id: gameOverRectangle
+                color: "#f0e9e0"
+                radius: 10
+                opacity: 0.7
+                anchors.fill: parent
+                visible: true
+
+                Rectangle {
+                    id: gameOverBouton
+                    x: 139
+                    y: 158
+                    width: 100
+                    height: 40
+                    color: "#8f7a66"
+                    radius: 10
+                    border.width: 0
+                    anchors.verticalCenterOffset: 20
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    z: 1
+
+                    Text {
+                        id: gameOverBoutonTexte
+                        color: "#ffffff"
+                        text: qsTr("New Game")
+                        font.bold: true
+                        font.family: "Verdana"
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.fill: parent
+                        font.pixelSize: 13
+                    }
+                }
+
+                Text {
+                    id: gameOverText
+                    text: qsTr("Game Over!")
+                    bottomPadding: 50
+                    font.bold: true
+                    font.family: "Verdana"
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    anchors.fill: parent
+                    font.pixelSize: 25
+                }
+
+            }
         }
 
         Text {
             id: reglesDuJeu
             y: 489
             color: "#776e65"
-            text: qsTr("<b>How to play:</b> Use your <b>arrow keys</b> to move the tiles. When two tiles with the same number touch, they <b>merge into one! </b>")
+            text: "<b>How to play:</b> Use your <b>arrow keys</b> to move the tiles. When two tiles with the same number touch, they <b>merge into one! </b>"
+            elide: Text.ElideNone
+            horizontalAlignment: Text.AlignJustify
             fontSizeMode: Text.FixedSize
             font.family: "Verdana"
             anchors.bottom: parent.bottom
