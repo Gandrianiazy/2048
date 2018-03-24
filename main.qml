@@ -12,7 +12,25 @@ Window {
         id: principaleRectangle
         color: "#faf8ef"
         anchors.fill: parent
-
+        focus: true
+        Keys.onPressed: {
+            switch (event.key){
+            case Qt.Key_Up:
+                damierQML.changeScore(damierQML.scoreQML+1)
+                damierQML.changeBestScore(Math.max(damierQML.scoreQML, damierQML.bestScoreQML))
+                break
+            case Qt.Key_Down:
+                damierQML.changeScore(damierQML.scoreQML-1)
+                break
+            case Qt.Key_Left:
+                damierQML.changeGameOver()
+                console.log(damierQML.gameOverQML)
+                break
+            case Qt.Key_Right:
+                damierQML.changeCasesUp()
+                break
+            }
+        }
         Text {
             id: titre
             y: 20
@@ -65,7 +83,7 @@ Window {
                 width: 50
                 height: 30
                 color: "#ffffff"
-                text: qsTr("12345")
+                text: damierQML.scoreQML
                 bottomPadding: 5
                 verticalAlignment: Text.AlignVCenter
                 font.bold: true
@@ -111,7 +129,7 @@ Window {
                 width: 50
                 height: 30
                 color: "#ffffff"
-                text: qsTr("12345")
+                text: damierQML.bestScoreQML
                 bottomPadding: 5
                 verticalAlignment: Text.AlignVCenter
                 font.pixelSize: 12
@@ -180,7 +198,7 @@ Window {
                 y: 6
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[0])
                 radius: 5
                 anchors.top: parent.top
                 anchors.topMargin: 8
@@ -190,7 +208,7 @@ Window {
 
                 Text {
                     id: valCase1
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[0]
                     font.bold: true
                     font.family: "Verdana"
                     verticalAlignment: Text.AlignVCenter
@@ -206,7 +224,7 @@ Window {
                 y: 9
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[1])
                 radius: 5
                 anchors.topMargin: 8
                 anchors.leftMargin: 76
@@ -216,7 +234,7 @@ Window {
 
                 Text {
                     id: valCase2
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[1]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -232,7 +250,7 @@ Window {
                 y: 14
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[2])
                 radius: 5
                 anchors.right: parent.right
                 anchors.rightMargin: 76
@@ -242,7 +260,7 @@ Window {
 
                 Text {
                     id: valCase3
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[2]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -258,7 +276,7 @@ Window {
                 y: 16
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[3])
                 radius: 5
                 anchors.topMargin: 8
                 anchors.right: parent.right
@@ -268,7 +286,7 @@ Window {
 
                 Text {
                     id: valCase4
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[3]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -284,7 +302,7 @@ Window {
                 y: 10
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[4])
                 radius: 5
                 anchors.topMargin: 76
                 anchors.leftMargin: 8
@@ -294,7 +312,7 @@ Window {
 
                 Text {
                     id: valCase5
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[4]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -309,7 +327,7 @@ Window {
                 x: 14
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[5])
                 radius: 5
                 anchors.top: parent.top
                 anchors.topMargin: 76
@@ -319,7 +337,7 @@ Window {
 
                 Text {
                     id: valCase6
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[5]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -335,7 +353,7 @@ Window {
                 y: 18
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[6])
                 radius: 5
                 anchors.topMargin: 76
                 anchors.right: parent.right
@@ -345,7 +363,7 @@ Window {
 
                 Text {
                     id: valCase7
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[6]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -361,7 +379,7 @@ Window {
                 y: 20
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[7])
                 radius: 5
                 anchors.topMargin: 76
                 anchors.right: parent.right
@@ -371,7 +389,7 @@ Window {
 
                 Text {
                     id: valCase8
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[7]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -387,7 +405,7 @@ Window {
                 y: 1
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[8])
                 radius: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 76
@@ -397,7 +415,7 @@ Window {
 
                 Text {
                     id: valCase9
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[8]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -413,7 +431,7 @@ Window {
                 y: 4
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[9])
                 radius: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 76
@@ -423,7 +441,7 @@ Window {
 
                 Text {
                     id: valCase10
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[9]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -439,7 +457,7 @@ Window {
                 y: 9
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[10])
                 radius: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 76
@@ -449,7 +467,7 @@ Window {
 
                 Text {
                     id: valCase11
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[10]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -465,7 +483,7 @@ Window {
                 y: 11
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[11])
                 radius: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 76
@@ -475,7 +493,7 @@ Window {
 
                 Text {
                     id: valCase12
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[11]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -491,7 +509,7 @@ Window {
                 y: 5
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[12])
                 radius: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 8
@@ -501,7 +519,7 @@ Window {
 
                 Text {
                     id: valCase13
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[12]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -517,7 +535,7 @@ Window {
                 y: 8
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[13])
                 radius: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 8
@@ -527,7 +545,7 @@ Window {
 
                 Text {
                     id: valCase14
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[13]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -543,7 +561,7 @@ Window {
                 y: 13
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[14])
                 radius: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 8
@@ -553,7 +571,7 @@ Window {
 
                 Text {
                     id: valCase15
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[14]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -569,7 +587,7 @@ Window {
                 y: 15
                 width: 60
                 height: 60
-                color: "#cdc1b4"
+                color: damierQML.colorChoice(damierQML.casesQML[15])
                 radius: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 8
@@ -579,7 +597,7 @@ Window {
 
                 Text {
                     id: valCase16
-                    text: qsTr("2048")
+                    text: damierQML.casesQML[15]
                     verticalAlignment: Text.AlignVCenter
                     font.pixelSize: 12
                     font.family: "Verdana"
@@ -593,9 +611,8 @@ Window {
                 id: gameOverRectangle
                 color: "#f0e9e0"
                 radius: 10
-                opacity: 0.7
+                opacity: (damierQML.gameOverQML) ? 0.7 : 0
                 anchors.fill: parent
-                visible: true
 
                 Rectangle {
                     id: gameOverBouton

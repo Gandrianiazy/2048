@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QtQml>
+#include "damier.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,9 +12,11 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-    if (engine.rootObjects().isEmpty())
-        return -1;
 
+    damier damierJeu;
+    engine.rootContext()->setContextProperty("damierQML", &damierJeu);
+//    if (engine.rootObjects().isEmpty())
+//        return -1;
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     return app.exec();
 }
