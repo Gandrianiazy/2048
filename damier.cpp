@@ -7,7 +7,7 @@ damier::damier(QObject *parent) : QObject(parent)
     gameOver = false;
     for (int i=0; i<16; i++)
     {
-        cases.append(2);
+        cases.append(0);
     }
 }
 
@@ -22,9 +22,11 @@ int damier::readScore()
     return score;
 }
 
-void damier::changeBestScore(int a)
+void damier::changeBestScore()
 {
-    bestScore = a;
+    if (bestScore<score){
+        bestScore=score;
+    }
     bestScoreChanged();
 }
 
@@ -63,21 +65,7 @@ void damier::changeCases2(int rang)
 
 void damier::changeCasesUp()
 {
-    for(int col = 0; col<4; col++)
-    {
-        for(int ligne = 0; ligne<3; ligne++)
-        {
-            if(cases[4*ligne+col]==cases[4*(ligne+1)+col])
-            {
-                changeCases(4*ligne+col, 2*cases[4*ligne+col]);
-                for(int i = ligne+1; i<3; i++)
-                {
-                    changeCases(4*i+col, cases[4*(i+1)+col]);
-                }
-            break;
-            }
-        }
-    }
+
 }
 
 QString damier::colorChoice(int a)
@@ -136,4 +124,47 @@ QString damier::colorChoice(int a)
     else{
         return("#cdc1b4");
     }
+}
+
+void damier::generator()
+{
+    int compteurVide = 0;
+    for (int i=0; i<16; i++)
+    {
+        if(cases[i]==0)
+        {
+            compteurVide++;        }
+    }
+    if(compteurVide>0){
+        int numero = randomInt(0,compteurVide);
+
+        compteurVide = 0;
+
+        for (int i=0; i<16; i++)
+        {
+            if(cases[i]==0)
+            {
+                if(compteurVide==numero)
+                {
+                    int test = randomInt(0,10);
+                    if(test==0)
+                    {
+                        cases[i]=4;
+                    }
+                    else
+                    {
+                        cases[i]=2;
+                    }
+                }
+                compteurVide++;
+            }
+        }
+    }
+    casesChanged();
+}
+
+int damier::randomInt(int a, int b)
+{
+    srand(time(NULL));
+    return (rand()%(b-a)+a);
 }

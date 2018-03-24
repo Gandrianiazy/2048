@@ -16,18 +16,7 @@ Window {
         Keys.onPressed: {
             switch (event.key){
             case Qt.Key_Up:
-                damierQML.changeScore(damierQML.scoreQML+1)
-                damierQML.changeBestScore(Math.max(damierQML.scoreQML, damierQML.bestScoreQML))
-                break
-            case Qt.Key_Down:
-                damierQML.changeScore(damierQML.scoreQML-1)
-                break
-            case Qt.Key_Left:
-                damierQML.changeGameOver()
-                console.log(damierQML.gameOverQML)
-                break
-            case Qt.Key_Right:
-                damierQML.changeCasesUp()
+                damierQML.generator()
                 break
             }
         }
