@@ -170,6 +170,10 @@ void damier::resetDamier()
     generator();
     generator();
     casesChanged();
+    score=0;
+    bestScore=0;
+    scoreChanged();
+    bestScoreChanged();
 }
 
 void damier::changeCasesUp()
@@ -180,6 +184,8 @@ void damier::changeCasesUp()
     if(ifCasesChanged)
     {
         generator();
+        scoreChanged();
+        bestScoreChanged();
     }
     ifCasesChanged=false;
 }
@@ -220,6 +226,10 @@ void damier::fusionUp()
             if (cases[4*row+col]==cases[4*(row+1)+col])
             {
                 changeCases(4*row+col, 2*cases[4*row+col]);
+                changeScore(score+cases[4*row+col]);
+                scoreChanged();
+                changeBestScore();
+                bestScoreChanged();
                 changeCases(4*(row+1)+col, 0);
                 row++;
                 row++;
@@ -242,6 +252,8 @@ void damier::changeCasesDown()
     if(ifCasesChanged)
     {
         generator();
+        scoreChanged();
+        bestScoreChanged();
     }
 }
 
@@ -281,6 +293,10 @@ void damier::fusionDown()
             if (cases[4*row+col]==cases[4*(row-1)+col])
             {
                 changeCases(4*row+col, 2*cases[4*row+col]);
+                changeScore(score+cases[4*row+col]);
+                scoreChanged();
+                changeBestScore();
+                bestScoreChanged();
                 changeCases(4*(row-1)+col, 0);
                 row--;
                 row--;
@@ -303,6 +319,8 @@ void damier::changeCasesRight()
     if(ifCasesChanged)
     {
         generator();
+        scoreChanged();
+        bestScoreChanged();
     }
 }
 
@@ -342,6 +360,10 @@ void damier::fusionRight()
             if (cases[4*row+col]==cases[4*row+col-1])
             {
                 changeCases(4*row+col, 2*cases[4*row+col]);
+                changeScore(score+cases[4*row+col]);
+                scoreChanged();
+                changeBestScore();
+                bestScoreChanged();
                 changeCases(4*row+col-1, 0);
                 col--;
                 col--;
@@ -364,6 +386,8 @@ void damier::changeCasesLeft()
     if(ifCasesChanged)
     {
         generator();
+        scoreChanged();
+        bestScoreChanged();
     }
     ifCasesChanged=false;
 }
@@ -404,6 +428,10 @@ void damier::fusionLeft()
             if (cases[4*row+col]==cases[4*row+col+1])
             {
                 changeCases(4*row+col, 2*cases[4*row+col]);
+                changeScore(score+cases[4*row+col]);
+                scoreChanged();
+                changeBestScore();
+                bestScoreChanged();
                 changeCases(4*row+col+1, 0);
                 col++;
                 col++;
@@ -416,4 +444,9 @@ void damier::fusionLeft()
             }
         }
     }
+}
+
+void damier::testGameOver()
+{
+
 }

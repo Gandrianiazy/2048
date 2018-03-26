@@ -35,6 +35,7 @@ public:
     void fusionLeft();
     void decalerRight();
     void fusionRight();
+    void testGameOver();
 
 
     Q_PROPERTY(int scoreQML READ readScore WRITE changeScore NOTIFY scoreChanged);
