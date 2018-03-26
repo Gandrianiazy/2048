@@ -18,6 +18,15 @@ Window {
             case Qt.Key_Up:
                 damierQML.changeCasesUp()
                 break
+            case Qt.Key_Down:
+                damierQML.changeCasesDown()
+                break
+            case Qt.Key_Right:
+                damierQML.changeCasesRight()
+                break
+            case Qt.Key_Left:
+                damierQML.changeCasesLeft()
+                break
             case Qt.Key_N:
                 damierQML.resetDamier()
                 break

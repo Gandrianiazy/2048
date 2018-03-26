@@ -5,6 +5,7 @@ damier::damier(QObject *parent) : QObject(parent)
     score = 0;
     bestScore = 0;
     gameOver = false;
+    ifCasesChanged=false;
     for (int i=0; i<16; i++)
     {
         cases.append(0);
@@ -176,6 +177,11 @@ void damier::changeCasesUp()
     decalerUp();
     fusionUp();
     decalerUp();
+    if(ifCasesChanged)
+    {
+        generator();
+    }
+    ifCasesChanged=false;
 }
 
 void damier::decalerUp()
@@ -194,6 +200,7 @@ void damier::decalerUp()
                     if(compteurVide<row){
                         cases[4*row+col]=0;
                         casesChanged();
+                        ifCasesChanged=true;
 
                     }
                     compteurVide++;
@@ -217,10 +224,195 @@ void damier::fusionUp()
                 row++;
                 row++;
                 casesChanged();
+                ifCasesChanged=true;
             }
             else
             {
                 row++;
+            }
+        }
+    }
+}
+
+void damier::changeCasesDown()
+{
+    decalerDown();
+    fusionDown();
+    decalerDown();
+    if(ifCasesChanged)
+    {
+        generator();
+    }
+}
+
+void damier::decalerDown()
+{
+    for(int col=0; col<4; col++){
+            int row=3;
+            int compteurVide=3;
+            while(row>-1)
+            {
+                if(cases[4*row+col]==0)
+                {
+                    row--;
+                }
+                else{
+                    cases[4*compteurVide+col]=cases[4*row+col];
+                    if(compteurVide>row){
+                        cases[4*row+col]=0;
+                        casesChanged();
+                        ifCasesChanged=true;
+
+                    }
+                    compteurVide--;
+                    row--;
+                }
+            }
+    }
+}
+
+void damier::fusionDown()
+{
+    for(int col=0; col<4; col++)
+    {
+        int row=3;
+        while(row>0)
+        {
+            if (cases[4*row+col]==cases[4*(row-1)+col])
+            {
+                changeCases(4*row+col, 2*cases[4*row+col]);
+                changeCases(4*(row-1)+col, 0);
+                row--;
+                row--;
+                casesChanged();
+                ifCasesChanged=true;
+            }
+            else
+            {
+                row--;
+            }
+        }
+    }
+}
+
+void damier::changeCasesRight()
+{
+    decalerRight();
+    fusionRight();
+    decalerRight();
+    if(ifCasesChanged)
+    {
+        generator();
+    }
+}
+
+void damier::decalerRight()
+{
+    for(int row=0; row<4; row++){
+            int col=3;
+            int compteurVide=3;
+            while(col>-1)
+            {
+                if(cases[4*row+col]==0)
+                {
+                    col--;
+                }
+                else{
+                    cases[4*row+compteurVide]=cases[4*row+col];
+                    if(compteurVide>col){
+                        cases[4*row+col]=0;
+                        casesChanged();
+                        ifCasesChanged=true;
+
+                    }
+                    compteurVide--;
+                    col--;
+                }
+            }
+    }
+}
+
+void damier::fusionRight()
+{
+    for(int row=0; row<4; row++)
+    {
+        int col=3;
+        while(col>0)
+        {
+            if (cases[4*row+col]==cases[4*row+col-1])
+            {
+                changeCases(4*row+col, 2*cases[4*row+col]);
+                changeCases(4*row+col-1, 0);
+                col--;
+                col--;
+                casesChanged();
+                ifCasesChanged=true;
+            }
+            else
+            {
+                col--;
+            }
+        }
+    }
+}
+
+void damier::changeCasesLeft()
+{
+    decalerLeft();
+    fusionLeft();
+    decalerLeft();
+    if(ifCasesChanged)
+    {
+        generator();
+    }
+    ifCasesChanged=false;
+}
+
+void damier::decalerLeft()
+{
+    for(int row=0; row<4; row++){
+            int col=0;
+            int compteurVide=0;
+            while(col<4)
+            {
+                if(cases[4*row+col]==0)
+                {
+                    col++;
+                }
+                else{
+                    cases[4*row+compteurVide]=cases[4*row+col];
+                    if(compteurVide<col){
+                        cases[4*row+col]=0;
+                        casesChanged();
+                        ifCasesChanged=true;
+
+                    }
+                    compteurVide++;
+                    col++;
+                }
+            }
+    }
+}
+
+void damier::fusionLeft()
+{
+    for(int row=0; row<4; row++)
+    {
+        int col=0;
+        while(col<3)
+        {
+            if (cases[4*row+col]==cases[4*row+col+1])
+            {
+                changeCases(4*row+col, 2*cases[4*row+col]);
+                changeCases(4*row+col+1, 0);
+                col++;
+                col++;
+                casesChanged();
+                ifCasesChanged=true;
+            }
+            else
+            {
+                col++;
             }
         }
     }

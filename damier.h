@@ -20,15 +20,21 @@ public:
     Q_INVOKABLE QList<int> readCases();
     Q_INVOKABLE void changeCases(int rang, int val);
     Q_INVOKABLE void changeCasesUp();
+    Q_INVOKABLE void changeCasesDown();
+    Q_INVOKABLE void changeCasesRight();
+    Q_INVOKABLE void changeCasesLeft();
     Q_INVOKABLE QString colorChoice(int a);
     Q_INVOKABLE void generator();
     int randomInt(int a, int b);
     Q_INVOKABLE void resetDamier();
     void decalerUp();
     void fusionUp();
-//    void decalerDown();
-//    void decalerLeft();
-//    void decalerRight();
+    void decalerDown();
+    void fusionDown();
+    void decalerLeft();
+    void fusionLeft();
+    void decalerRight();
+    void fusionRight();
 
 
     Q_PROPERTY(int scoreQML READ readScore WRITE changeScore NOTIFY scoreChanged);
@@ -49,6 +55,7 @@ private:
     int bestScore;
     bool gameOver;
     QList<int> cases;
+    bool ifCasesChanged;
 };
 
 #endif // DAMIER_H
