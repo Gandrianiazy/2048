@@ -19,11 +19,16 @@ public:
     Q_INVOKABLE void changeGameOver();
     Q_INVOKABLE QList<int> readCases();
     Q_INVOKABLE void changeCases(int rang, int val);
-    Q_INVOKABLE void changeCases2(int rang);
     Q_INVOKABLE void changeCasesUp();
     Q_INVOKABLE QString colorChoice(int a);
     Q_INVOKABLE void generator();
     int randomInt(int a, int b);
+    Q_INVOKABLE void resetDamier();
+    void decalerUp();
+    void fusionUp();
+//    void decalerDown();
+//    void decalerLeft();
+//    void decalerRight();
 
 
     Q_PROPERTY(int scoreQML READ readScore WRITE changeScore NOTIFY scoreChanged);

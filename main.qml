@@ -16,7 +16,10 @@ Window {
         Keys.onPressed: {
             switch (event.key){
             case Qt.Key_Up:
-                damierQML.generator()
+                damierQML.changeCasesUp()
+                break
+            case Qt.Key_N:
+                damierQML.resetDamier()
                 break
             }
         }
@@ -148,7 +151,7 @@ Window {
             x: 195
             y: 85
             width: 100
-            height: 30
+            height: 35
             color: "#8f7a66"
             radius: 5
             anchors.right: parent.right
@@ -157,14 +160,13 @@ Window {
 
             Text {
                 id: newGameText
-                x: 47
-                y: 8
                 color: "#f9f6f2"
-                text: qsTr("New Game")
+                text: qsTr("New Game (press N)")
+                horizontalAlignment: Text.AlignHCenter
+                anchors.fill: parent
+                wrapMode: Text.WordWrap
                 font.bold: true
                 font.family: "Verdana"
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 12
             }
         }

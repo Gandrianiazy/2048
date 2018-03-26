@@ -9,6 +9,8 @@ damier::damier(QObject *parent) : QObject(parent)
     {
         cases.append(0);
     }
+    srand(time(NULL));
+    resetDamier();
 }
 
 void damier::changeScore(int a)
@@ -56,16 +58,6 @@ void damier::changeCases(int rang, int val)
 {
     cases[rang]=val;
     casesChanged();
-}
-
-void damier::changeCases2(int rang)
-{
-    changeCases(rang, cases[rang]+cases[rang-1]);
-}
-
-void damier::changeCasesUp()
-{
-
 }
 
 QString damier::colorChoice(int a)
@@ -146,8 +138,7 @@ void damier::generator()
             {
                 if(compteurVide==numero)
                 {
-                    int test = randomInt(0,10);
-                    if(test==0)
+                    if(randomInt(0,10)==0)
                     {
                         cases[i]=4;
                     }
@@ -165,6 +156,72 @@ void damier::generator()
 
 int damier::randomInt(int a, int b)
 {
-    srand(time(NULL));
     return (rand()%(b-a)+a);
+}
+
+void damier::resetDamier()
+{
+    for(int i = 0; i<16; i++)
+    {
+        cases[i]=0;
+    }
+    casesChanged();
+    generator();
+    generator();
+    casesChanged();
+}
+
+void damier::changeCasesUp()
+{
+    decalerUp();
+    fusionUp();
+    decalerUp();
+}
+
+void damier::decalerUp()
+{
+    for(int col=0; col<4; col++){
+            int row=0;
+            int compteurVide=0;
+            while(row<4)
+            {
+                if(cases[4*row+col]==0)
+                {
+                    row++;
+                }
+                else{
+                    cases[4*compteurVide+col]=cases[4*row+col];
+                    if(compteurVide<row){
+                        cases[4*row+col]=0;
+                        casesChanged();
+
+                    }
+                    compteurVide++;
+                    row++;
+                }
+            }
+    }
+}
+
+void damier::fusionUp()
+{
+    for(int col=0; col<4; col++)
+    {
+        int row=0;
+        while(row<3)
+        {
+            if (cases[4*row+col]==cases[4*(row+1)+col])
+            {
+                changeCases(4*row+col, 2*cases[4*row+col]);
+                changeCases(4*(row+1)+col, 0);
+                row++;
+                row++;
+                casesChanged();
+            }
+            else
+            {
+                row++;
+            }
+        }
+    }
 }
