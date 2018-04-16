@@ -2,6 +2,7 @@
 
 damier::damier(QObject *parent) : QObject(parent)
 {
+    menuprincipalOn=true;
     score = 0;
     bestScore = 0;
     gameOver = false;
@@ -449,4 +450,21 @@ void damier::fusionLeft()
 void damier::testGameOver()
 {
 
+}
+
+void damier::menuprincipal()
+{
+    menuprincipalOn=true;
+    etatmenuprincipalChanged();
+}
+
+bool damier::readEtatMenuPrincipal()
+{
+    return menuprincipalOn;
+}
+
+void damier::fermermenu()
+{
+    menuprincipalOn=false;
+    etatmenuprincipalChanged();
 }
