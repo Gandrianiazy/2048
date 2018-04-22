@@ -25,6 +25,9 @@ public:
     Q_INVOKABLE void changeCasesLeft();
     Q_INVOKABLE QString colorChoice(int a);
     Q_INVOKABLE void generator();
+    Q_INVOKABLE void menuprincipal();
+    Q_INVOKABLE bool readEtatMenuPrincipal();
+    Q_INVOKABLE void fermermenu();
     int randomInt(int a, int b);
     Q_INVOKABLE void resetDamier();
     void decalerUp();
@@ -42,12 +45,14 @@ public:
     Q_PROPERTY(int bestScoreQML READ readBestScore NOTIFY bestScoreChanged);
     Q_PROPERTY(bool gameOverQML READ readGameOver NOTIFY gameOverChanged);
     Q_PROPERTY(QList<int> casesQML READ readCases NOTIFY casesChanged);
+    Q_PROPERTY(bool etatmenuprincipalQML READ readEtatMenuPrincipal NOTIFY etatmenuprincipalChanged);
 
 signals:
     void scoreChanged();
     void bestScoreChanged();
     void gameOverChanged();
     void casesChanged();
+    void etatmenuprincipalChanged();
 
 public slots:
 
@@ -57,6 +62,7 @@ private:
     bool gameOver;
     QList<int> cases;
     bool ifCasesChanged;
+    bool menuprincipalOn;
 };
 
 #endif // DAMIER_H
